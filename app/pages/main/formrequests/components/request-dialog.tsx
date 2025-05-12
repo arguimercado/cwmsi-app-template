@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import CWMSIButton from "~/components/commons/cwmsi-button";
 import CWMSIDialog from "~/components/commons/cwmsi-dialog";
-import CWMSInputField from "~/components/commons/inputs/cwms-input-fields";
+import CWMSInputField from "~/components/commons/inputs/cwms-input-field";
 import CWMSSelectField from "~/components/commons/inputs/cwmsi-select";
+import CWMSTextAreaField from "~/components/commons/inputs/cwmsi-textarea-field";
 import { Form } from "~/components/ui/form";
 import type { SelectOption } from "~/lib/types/data-control";
 
@@ -30,25 +31,13 @@ const RequestDialog = () => {
 
    const typeData : SelectOption[] = [
       {
-         label: "Type 1",
-         value: "type1",
+         label: "Payment Request",
+         value: "paymentRequest",
       },
       {
-         label: "Type 2",
-         value: "type2",
+         label: "Reimbursement Request",
+         value: "reimbursmentRequest",
       },
-      {
-         label: "Type 3",
-         value: "type3",
-      },
-      {
-         label: "Type 4",
-         value: "type4",
-      },
-      {
-         label: "Type 5",
-         value: "type5",
-      }
    ]
    
 
@@ -82,8 +71,13 @@ const RequestDialog = () => {
                      className="w-full"
                      placeholder="Enter the title of the request"
                   />
-                 
-
+                  <CWMSTextAreaField
+                     control={form.control}
+                     name="description"
+                     label="Description"
+                     className="w-full"
+                     
+                  />
             </form>
          </Form>
       </CWMSIDialog>

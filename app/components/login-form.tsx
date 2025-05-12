@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form";
 import { authSchema, type AuthSchema } from "~/lib/types/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "./ui/form";
-import CWMSInputField from "./commons/inputs/cwms-input-fields";
+import CWMSInputField from "./commons/inputs/cwms-input-field";
 import { KeyIcon, User2Icon } from "lucide-react";
 
 interface ILoginFormProps {

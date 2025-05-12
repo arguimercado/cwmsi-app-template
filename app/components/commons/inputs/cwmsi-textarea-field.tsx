@@ -1,34 +1,38 @@
 import React from "react";
 import { type FieldValues, type Path, type Control, Controller, useFormContext } from "react-hook-form";
 import { cn } from "~/lib/utils";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
+import { Input } from "~/components/ui/input";
 import { FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "~/components/ui/form";
 import { cva } from "class-variance-authority";
-import type { SelectOption } from "~/lib/types/data-control";
+import { Textarea } from "~/components/ui/textarea";
 
-const selectVariants = cva(
-  "",
+const inputVariants = cva(
+  "pr-10 py-5 text-sm rounded-md transition-colors duration-200 ease-in-out ",
   {
     variants: {
       variant: {
-        default: "",
-        outline: "border",
-        ghost: "bg-transparent shadow-none focus-visible:ring-0",
-        underline: "border-b-2 border-b-primary focus-visible:ring-0 focus-visible:border-b-2 focus-visible:border-b-primary",
+        default: "bg-slate-100 text-slate-900 placeholder:text-slate-400 focus-visible:ring-0 focus-visible:border-b-2 focus-visible:border-b-primary",
+        outline: "border ",
+        ghost: "bg-transparent shadow-none focus-visible:ring-0 border-none focus-visible:border-b-2 focus-visible:border-b-primary",
+        underline: "border-b-2 border-b-primary border-t-none  focus-visible:ring-0 focus-visible:border-b-2 focus-visible:border-b-primary",
       },
       hasIcon: {
         true: "pl-10",
       }
     },
+    compoundVariants: [
+      {
+        variant: "underline",
+        class: "focus-visible:ring-0 focus-visible:border-b-2 focus-visible:border-b-primary",
+      },
+    ],
     defaultVariants: {
       variant: "default",
     },
   }
 );
 
-
-
-export type FormSelectFieldProps<T extends FieldValues> = {
+export type FormFieldProps<T extends FieldValues> = {
   label?: string;
   icon?: React.ReactNode;
   variant?: "outline" | "default" | "ghost" | "underline";
@@ -36,13 +40,14 @@ export type FormSelectFieldProps<T extends FieldValues> = {
   description?: string;
   control?: Control<T>;
   className?: string;
-  options: SelectOption[];
-  placeholder?: string;
+  type?: string;
   disabled?: boolean;
+  placeholder?: string;
+  autoComplete?: string;
   [key: string]: any;
 };
 
-function CWMSSelectField<T extends FieldValues>({
+function CWMSTextAreaField<T extends FieldValues>({
   label,
   icon,
   variant = "default",
@@ -50,11 +55,8 @@ function CWMSSelectField<T extends FieldValues>({
   description,
   control: propControl,
   className,
-  options,
-  placeholder,
-  disabled,
   ...props
-}: FormSelectFieldProps<T>) {
+}: FormFieldProps<T>) {
   const methods = useFormContext<T>();
   const control = propControl || methods.control;
   const hasIcon = !!icon;
@@ -73,30 +75,12 @@ function CWMSSelectField<T extends FieldValues>({
                   {icon}
                 </div>
               )}
-              <Select
-                onValueChange={field.onChange}
-                value={field.value}
-                disabled={disabled}
+              <Textarea
+                id={name}
+                className={cn(inputVariants({ variant, hasIcon }), className)}
+                {...field}
                 {...props}
-              >
-                <SelectTrigger
-                  id={name}
-                  className={cn(selectVariants({ variant, hasIcon }), className)}
-                >
-                  <SelectValue placeholder={placeholder} />
-                </SelectTrigger>
-                <SelectContent>
-                  {options.map((option) => (
-                    <SelectItem
-                      key={option.value}
-                      value={option.value}
-                      disabled={option.disabled}
-                    >
-                      {option.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              />
             </div>
           )}
         />
@@ -107,4 +91,4 @@ function CWMSSelectField<T extends FieldValues>({
   );
 }
 
-export default CWMSSelectField;
+export default CWMSTextAreaField;
