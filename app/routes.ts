@@ -9,7 +9,7 @@ export default [
 
     layout("pages/main/layout.tsx", [
         index("pages/main/dashboards/dashboard.tsx"),
-        
+        route("form-requests", "pages/main/formrequests/page.tsx"),
     ]),
 
 ] satisfies RouteConfig;
