@@ -5,10 +5,11 @@ interface IDialogProps extends React.ComponentProps<typeof Dialog> {
    triggerButton?: React.ReactNode;
    contentClassName?: string;
    children?: React.ReactNode;
+   dialogTitle?: string;
 }
 
 
-const CWMSIDialog = ({triggerButton,contentClassName,children, ...props} : IDialogProps) => {
+const CWMSIDialog = ({triggerButton,contentClassName,children,dialogTitle, ...props} : IDialogProps) => {
   return (
     <Dialog {...props}>
       <DialogTrigger asChild>
@@ -16,10 +17,8 @@ const CWMSIDialog = ({triggerButton,contentClassName,children, ...props} : IDial
       </DialogTrigger>
       <DialogContent className={contentClassName}>
       <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DialogDescription>
+          <DialogTitle>{dialogTitle}</DialogTitle>
+          <DialogDescription></DialogDescription>
         </DialogHeader>
          {children}
       </DialogContent>
