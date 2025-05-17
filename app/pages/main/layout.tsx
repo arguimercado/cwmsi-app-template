@@ -12,7 +12,6 @@ import Header from "./components/header";
 
 
 const MainLayout = () => {
-	
    return (
       <>
          <SidebarProvider>
